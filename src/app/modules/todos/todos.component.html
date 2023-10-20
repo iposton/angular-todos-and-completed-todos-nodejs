@@ -1,0 +1,19 @@
+<p>todos</p>
+
+<div *ngFor="let item of todos; index as i">
+    <label class="form-control" *ngIf="!item.completed">
+        <input type="radio" name="radio" value="{{i}}" (change)="onChange($event)" />
+        {{item.todo}}
+    </label>
+</div>
+
+<hr>
+
+<p>completed tasks</p>
+
+<div *ngFor="let item of todos; index as i">
+    <label class="form-control" *ngIf="item.completed">
+        <input type="radio" name="radio" value="{{i}}" (change)="onChange($event)" />
+        {{item.todo}}
+    </label>
+</div>

@@ -6,6 +6,7 @@ import * as express from 'express';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppServerModule } from './src/main.server';
+import { api } from './api/api';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -20,6 +21,11 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
+
+  server.post('/todos', async (req, res) => {
+      const todos =  await api.todos.getTodos();
+      res.status(200).json(todos);
+  })
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
